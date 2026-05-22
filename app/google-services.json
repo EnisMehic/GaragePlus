@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "475702564023",
+    "project_id": "garageplus-41f8d",
+    "storage_bucket": "garageplus-41f8d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475702564023:android:812c6028458ef5ca23e932",
+        "android_client_info": {
+          "package_name": "com.ipi.garageplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTxvh1yyomamz7HM28ywPsBFohsIyUorY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

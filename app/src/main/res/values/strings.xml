@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GaragePlus</string>
+    <string name="login">Prijava</string>
+    <string name="register">Registracija</string>
+    <string name="email">Email adresa</string>
+    <string name="password">Lozinka</string>
+    <string name="full_name">Ime i prezime</string>
+    <string name="dont_have_account">Nemate račun? Registrujte se</string>
+    <string name="already_have_account">Već imate račun? Prijavite se</string>
+    <string name="welcome_back">Dobrodošli nazad!</string>
+    <string name="create_account">Kreirajte račun</string>
+</resources>
