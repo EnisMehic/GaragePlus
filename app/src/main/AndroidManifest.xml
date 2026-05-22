@@ -33,5 +33,17 @@
             android:name=".ui.home.HomeActivity"
             android:exported="false"/>
 
+        <activity
+            android:name=".ui.home.AddVehicleActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".ui.home.VehicleDetailActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".ui.home.AddServiceActivity"
+            android:exported="false"/>
+
     </application>
 </manifest>
