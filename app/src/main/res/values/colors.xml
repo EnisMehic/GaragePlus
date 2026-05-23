@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Base -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">#1B5E20</color>
-    <color name="primary_dark">#003300</color>
-    <color name="primary_light">#4CAF50</color>
-    <color name="accent">#FF6D00</color>
-    <color name="background">#F5F5F5</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
+
+    <!-- Background / Surface (dark theme) -->
+    <color name="background">#121212</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="surface_variant">#242424</color>
+
+    <!-- Primary (blue theme) -->
+    <color name="primary">#1E88E5</color>
+    <color name="primary_dark">#1565C0</color>
+    <color name="primary_light">#64B5F6</color>
+
+    <!-- Accent (orange) -->
+    <color name="accent">#FF8F00</color>
+    <color name="accent_dark">#EF6C00</color>
+    <color name="accent_light">#FFB74D</color>
+
+    <!-- Text -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3FFFFFF</color>
+    <color name="text_disabled">#66FFFFFF</color>
+
+    <!-- Material (fixed, consistent with theme) -->
+    <color name="colorPrimary">#1E88E5</color>
+    <color name="colorPrimaryVariant">#1565C0</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
 </resources>

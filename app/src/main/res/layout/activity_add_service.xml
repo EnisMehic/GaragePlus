@@ -16,7 +16,7 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tip servisa"
+            android:hint="Kategorija"
             android:layout_marginBottom="12dp">
             <AutoCompleteTextView
                 android:id="@+id/etTipServisa"
@@ -25,6 +25,90 @@
                 android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPodkategorija"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Podkategorija"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone">
+            <AutoCompleteTextView
+                android:id="@+id/etPodkategorija"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Dodaj ovo između tilPodkategorija i etOpis -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardFilteri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zamijenjeni filteri:"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <CheckBox
+                    android:id="@+id/cbFilterUlja"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filter ulja"
+                    android:textSize="14sp"
+                    android:buttonTint="@color/primary"/>
+
+                <CheckBox
+                    android:id="@+id/cbFilterKlime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filter klime"
+                    android:textSize="14sp"
+                    android:buttonTint="@color/primary"/>
+
+                <CheckBox
+                    android:id="@+id/cbFilterGoriva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filter goriva"
+                    android:textSize="14sp"
+                    android:buttonTint="@color/primary"/>
+
+                <CheckBox
+                    android:id="@+id/cbFilterKabine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filter kabine"
+                    android:textSize="14sp"
+                    android:buttonTint="@color/primary"/>
+
+                <CheckBox
+                    android:id="@+id/cbFilterZraka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filter zraka"
+                    android:textSize="14sp"
+                    android:buttonTint="@color/primary"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"

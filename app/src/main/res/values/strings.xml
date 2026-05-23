@@ -10,4 +10,19 @@
     <string name="already_have_account">Već imate račun? Prijavite se</string>
     <string name="welcome_back">Dobrodošli nazad!</string>
     <string name="create_account">Kreirajte račun</string>
+    <string name="add_vehicle">Dodaj vozilo</string>
+    <string name="add_service">Dodaj servisni zapis</string>
+    <string name="vehicle_make">Marka vozila</string>
+    <string name="vehicle_model">Model vozila</string>
+    <string name="vehicle_year">Godina proizvodnje</string>
+    <string name="vehicle_mileage">Kilometraža</string>
+    <string name="vehicle_plate">Registarska oznaka</string>
+    <string name="save">Sačuvaj</string>
+    <string name="logout">Odjava</string>
+    <string name="delete">Obriši</string>
+    <string name="cancel">Otkaži</string>
+    <string name="no_vehicles">Nemate dodanih vozila.\nKliknite + za dodavanje vozila.</string>
+    <string name="no_services">Nema servisnih zapisa.\nKliknite + za dodavanje.</string>
+    <string name="search_services">Pretraži servise...</string>
+    <string name="total_costs">Ukupni troškovi</string>
 </resources>

@@ -2,19 +2,25 @@ package com.ipi.garageplus.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ipi.garageplus.R;
 import com.ipi.garageplus.model.Vehicle;
 import com.ipi.garageplus.ui.auth.LoginActivity;
+import com.ipi.garageplus.ui.profile.ProfileActivity;
+import com.ipi.garageplus.ui.settings.SettingsActivity;
 import com.ipi.garageplus.viewmodel.HomeViewModel;
 
 public class HomeActivity extends AppCompatActivity implements VehicleAdapter.OnVehicleClickListener {
@@ -30,6 +36,9 @@ public class HomeActivity extends AppCompatActivity implements VehicleAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -55,11 +64,11 @@ public class HomeActivity extends AppCompatActivity implements VehicleAdapter.On
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         viewModel.getVehiclesByUser(user.getUid()).observe(this, vehicles -> {
             if (vehicles == null || vehicles.isEmpty()) {
-                recyclerView.setVisibility(View.GONE);
-                tvEmptyState.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(android.view.View.GONE);
+                tvEmptyState.setVisibility(android.view.View.VISIBLE);
             } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                tvEmptyState.setVisibility(View.GONE);
+                recyclerView.setVisibility(android.view.View.VISIBLE);
+                tvEmptyState.setVisibility(android.view.View.GONE);
                 adapter.setVehicles(vehicles);
             }
         });
@@ -67,12 +76,29 @@ public class HomeActivity extends AppCompatActivity implements VehicleAdapter.On
         fabAddVehicle.setOnClickListener(v -> {
             startActivity(new Intent(this, AddVehicleActivity.class));
         });
+    }
 
-        findViewById(R.id.btnLogout).setOnClickListener(v -> {
-            mAuth.signOut();
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_profile) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("vehicle_count", adapter.getItemCount());
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

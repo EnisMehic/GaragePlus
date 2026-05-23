@@ -2,22 +2,26 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".ui.home.HomeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/primary">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/primary"
             android:title="GaragePlus"
-            android:titleTextColor="@color/white"/>
-
+            android:titleTextColor="@color/white"
+            app:titleTextColor="@color/white"
+            app:popupTheme="@style/ThemeOverlay.Material3.Light" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -29,28 +33,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingTop="16dp"
-            android:gravity="center_vertical">
+            android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/tvWelcome"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16sp"
+                android:text="Zdravo, korisniče! 👋"
                 android:textColor="@color/text_primary"
-                android:textStyle="bold"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Odjava"
-                android:textSize="12sp"
-                style="@style/Widget.Material3.Button.OutlinedButton"/>
-
+                android:layout_marginTop="4dp"
+                android:text="Pregled svih vaših vozila i servisne historije"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <TextView
@@ -59,20 +62,22 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:padding="24dp"
             android:text="Nemate dodanih vozila.\nKliknite + za dodavanje vozila."
             android:textAlignment="center"
             android:textColor="@color/text_secondary"
             android:textSize="16sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingVertical="8dp"
-            android:clipToPadding="false"/>
-
+            android:clipToPadding="false"
+            android:paddingVertical="4dp"
+            android:paddingBottom="88dp"
+            tools:listitem="@layout/item_vehicle" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -81,8 +86,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:contentDescription="Dodaj vozilo"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/primary"
-        app:tint="@color/white"/>
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
