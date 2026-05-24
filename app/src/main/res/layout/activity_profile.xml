@@ -8,15 +8,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:orientation="vertical"
         android:padding="20dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="16dp">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,26 +29,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Korisnički profil"
-                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
                     android:textSize="20sp"
-                    android:textColor="@color/text_primary" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="Pregled osnovnih podataka korisnika"
-                    android:textSize="13sp"
                     android:textColor="@color/text_secondary"
-                    android:layout_marginTop="4dp" />
+                    android:textSize="13sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="16dp">
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,64 +60,64 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ime i prezime"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:text="Korisnik"
-                    android:textSize="18sp"
                     android:textColor="@color/text_primary"
-                    android:layout_marginBottom="12dp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:text="email@example.com"
-                    android:textSize="16sp"
                     android:textColor="@color/text_primary"
-                    android:layout_marginBottom="12dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="UID"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvUid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:text="uid"
-                    android:textSize="13sp"
                     android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="12dp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Broj vozila"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvVehicleCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Broj vozila: 0"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_primary" />
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -124,17 +125,17 @@
             android:id="@+id/tvLogoutInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="Odjavom se briše trenutna sesija."
             android:textColor="@color/text_secondary"
-            android:textSize="13sp"
-            android:layout_marginBottom="16dp" />
+            android:textSize="13sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Odjava"
             android:backgroundTint="@color/primary"
+            android:text="Odjava"
             android:textColor="@color/white"
             app:cornerRadius="12dp" />
 

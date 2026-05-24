@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
         android:orientation="vertical"
         android:padding="24dp">
 
@@ -16,88 +17,94 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Marka vozila (npr. Volkswagen)"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Marka vozila (npr. Volkswagen)">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etMarka"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"/>
+                android:inputType="textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Model vozila (npr. Golf 7)"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Model vozila (npr. Golf 7)">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etModel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"/>
+                android:inputType="textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Godina proizvodnje"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Godina proizvodnje">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etGodina"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Trenutna kilometraža"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Trenutna kilometraža">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etKilometraza"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Registarska oznaka (npr. TK 123 AB)"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Registarska oznaka (npr. TK 123 AB)">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etRegistracija"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapCharacters"/>
+                android:inputType="textCapCharacters" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Napomena (opcionalno)"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="24dp"
+            android:hint="Napomena (opcionalno)">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etNapomena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:minLines="2"/>
+                android:minLines="2" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:backgroundTint="@color/primary"
             android:text="Sačuvaj vozilo"
-            android:textSize="16sp"
-            android:backgroundTint="@color/primary"/>
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>

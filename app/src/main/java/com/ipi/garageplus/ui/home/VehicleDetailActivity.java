@@ -3,17 +3,24 @@ package com.ipi.garageplus.ui.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ipi.garageplus.R;
 import com.ipi.garageplus.model.ServiceRecord;
 import com.ipi.garageplus.viewmodel.ServiceRecordViewModel;
+
+import java.util.List;
 
 public class VehicleDetailActivity extends AppCompatActivity
         implements ServiceRecordAdapter.OnServiceClickListener {
@@ -26,8 +33,13 @@ public class VehicleDetailActivity extends AppCompatActivity
     private TextView tvVehicleName, tvTotalCost, tvEmptyState;
     private RecyclerView recyclerView;
     private SearchView searchView;
+    private Spinner spinnerSort;
     private FloatingActionButton fabAddService;
     private int vehicleId;
+    private String vehicleName;
+
+    private String currentQuery = "";
+    private String currentSort = "Datum";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +47,22 @@ public class VehicleDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_vehicle_detail);
 
         vehicleId = getIntent().getIntExtra(EXTRA_VEHICLE_ID, -1);
-        String vehicleName = getIntent().getStringExtra(EXTRA_VEHICLE_NAME);
+        vehicleName = getIntent().getStringExtra(EXTRA_VEHICLE_NAME);
 
         if (vehicleId == -1) {
             finish();
             return;
         }
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         tvVehicleName = findViewById(R.id.tvVehicleName);
         tvTotalCost = findViewById(R.id.tvTotalCost);
         tvEmptyState = findViewById(R.id.tvEmptyState);
         recyclerView = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.searchView);
+        spinnerSort = findViewById(R.id.spinnerSort);
         fabAddService = findViewById(R.id.fabAddService);
 
         tvVehicleName.setText(vehicleName);
@@ -62,14 +78,24 @@ public class VehicleDetailActivity extends AppCompatActivity
 
         viewModel = new ViewModelProvider(this).get(ServiceRecordViewModel.class);
 
-        viewModel.getServicesByVehicle(vehicleId).observe(this, records -> {
-            if (records == null || records.isEmpty()) {
-                recyclerView.setVisibility(View.GONE);
-                tvEmptyState.setVisibility(View.VISIBLE);
-            } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                tvEmptyState.setVisibility(View.GONE);
-                adapter.setRecords(records);
+        String[] sortOptions = {"Datum", "Tip", "Cijena"};
+        ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sortOptions);
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSort.setAdapter(sortAdapter);
+
+        spinnerSort.setSelection(0);
+
+        spinnerSort.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
+                currentSort = sortOptions[position];
+                loadServices();
+            }
+
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> parent) {
+                currentSort = "Datum";
+                loadServices();
             }
         });
 
@@ -83,17 +109,16 @@ public class VehicleDetailActivity extends AppCompatActivity
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) { return false; }
+            public boolean onQueryTextSubmit(String query) {
+                currentQuery = query == null ? "" : query.trim();
+                loadServices();
+                return true;
+            }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.isEmpty()) {
-                    viewModel.getServicesByVehicle(vehicleId).observe(
-                            VehicleDetailActivity.this, records -> adapter.setRecords(records));
-                } else {
-                    viewModel.searchServices(vehicleId, newText).observe(
-                            VehicleDetailActivity.this, records -> adapter.setRecords(records));
-                }
+                currentQuery = newText == null ? "" : newText.trim();
+                loadServices();
                 return true;
             }
         });
@@ -103,6 +128,34 @@ public class VehicleDetailActivity extends AppCompatActivity
             intent.putExtra(AddServiceActivity.EXTRA_VEHICLE_ID, vehicleId);
             startActivity(intent);
         });
+
+        loadServices();
+    }
+
+    private void loadServices() {
+        if (currentQuery != null && !currentQuery.isEmpty()) {
+            viewModel.searchServices(vehicleId, currentQuery).observe(this, this::updateServices);
+            return;
+        }
+
+        if ("Tip".equals(currentSort)) {
+            viewModel.getServicesByVehicleSortedByType(vehicleId).observe(this, this::updateServices);
+        } else if ("Cijena".equals(currentSort)) {
+            viewModel.getServicesByVehicleSortedByPrice(vehicleId).observe(this, this::updateServices);
+        } else {
+            viewModel.getServicesByVehicle(vehicleId).observe(this, this::updateServices);
+        }
+    }
+
+    private void updateServices(List<ServiceRecord> records) {
+        if (records == null || records.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            tvEmptyState.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            tvEmptyState.setVisibility(View.GONE);
+            adapter.setRecords(records);
+        }
     }
 
     @Override

@@ -78,7 +78,7 @@ public class AddServiceActivity extends AppCompatActivity {
         cbFilterZraka = findViewById(R.id.cbFilterZraka);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Dodaj servisni zapis");
+            getSupportActionBar().setTitle("Dodaj zapis");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 

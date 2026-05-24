@@ -62,6 +62,14 @@ public class VehicleRepository {
         return serviceRecordDao.getServicesByVehicle(vehicleId);
     }
 
+    public LiveData<List<ServiceRecord>> getServicesByVehicleSortedByType(int vehicleId) {
+        return serviceRecordDao.getServicesByVehicleSortedByType(vehicleId);
+    }
+
+    public LiveData<List<ServiceRecord>> getServicesByVehicleSortedByPrice(int vehicleId) {
+        return serviceRecordDao.getServicesByVehicleSortedByPrice(vehicleId);
+    }
+
     public LiveData<List<ServiceRecord>> searchServices(int vehicleId, String query) {
         return serviceRecordDao.searchServices(vehicleId, query);
     }

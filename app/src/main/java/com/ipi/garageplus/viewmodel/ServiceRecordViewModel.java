@@ -1,10 +1,13 @@
 package com.ipi.garageplus.viewmodel;
 
 import android.app.Application;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
 import com.ipi.garageplus.model.ServiceRecord;
 import com.ipi.garageplus.repository.VehicleRepository;
+
 import java.util.List;
 
 public class ServiceRecordViewModel extends AndroidViewModel {
@@ -18,6 +21,14 @@ public class ServiceRecordViewModel extends AndroidViewModel {
 
     public LiveData<List<ServiceRecord>> getServicesByVehicle(int vehicleId) {
         return repository.getServicesByVehicle(vehicleId);
+    }
+
+    public LiveData<List<ServiceRecord>> getServicesByVehicleSortedByType(int vehicleId) {
+        return repository.getServicesByVehicleSortedByType(vehicleId);
+    }
+
+    public LiveData<List<ServiceRecord>> getServicesByVehicleSortedByPrice(int vehicleId) {
+        return repository.getServicesByVehicleSortedByPrice(vehicleId);
     }
 
     public LiveData<List<ServiceRecord>> searchServices(int vehicleId, String query) {

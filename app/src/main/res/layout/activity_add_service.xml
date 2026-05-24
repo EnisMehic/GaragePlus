@@ -9,20 +9,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="25dp">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Kategorija"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Kategorija">
+
             <AutoCompleteTextView
                 android:id="@+id/etTipServisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"/>
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -30,14 +32,15 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podkategorija"
             android:layout_marginBottom="12dp"
+            android:hint="Podkategorija"
             android:visibility="gone">
+
             <AutoCompleteTextView
                 android:id="@+id/etPodkategorija"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"/>
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Dodaj ovo između tilPodkategorija i etOpis -->
@@ -60,116 +63,121 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Zamijenjeni filteri:"
-                    android:textStyle="bold"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textStyle="bold" />
 
                 <CheckBox
                     android:id="@+id/cbFilterUlja"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
                     android:text="Filter ulja"
-                    android:textSize="14sp"
-                    android:buttonTint="@color/primary"/>
+                    android:textSize="14sp" />
 
                 <CheckBox
                     android:id="@+id/cbFilterKlime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
                     android:text="Filter klime"
-                    android:textSize="14sp"
-                    android:buttonTint="@color/primary"/>
+                    android:textSize="14sp" />
 
                 <CheckBox
                     android:id="@+id/cbFilterGoriva"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
                     android:text="Filter goriva"
-                    android:textSize="14sp"
-                    android:buttonTint="@color/primary"/>
+                    android:textSize="14sp" />
 
                 <CheckBox
                     android:id="@+id/cbFilterKabine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
                     android:text="Filter kabine"
-                    android:textSize="14sp"
-                    android:buttonTint="@color/primary"/>
+                    android:textSize="14sp" />
 
                 <CheckBox
                     android:id="@+id/cbFilterZraka"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/primary"
                     android:text="Filter zraka"
-                    android:textSize="14sp"
-                    android:buttonTint="@color/primary"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Opis (opcionalno)"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Opis (opcionalno)">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etOpis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:minLines="2"/>
+                android:minLines="2" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cijena (KM)"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Cijena (KM)">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCijena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Kilometraža pri servisu"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:hint="Kilometraža">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etKilometraza"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Datum servisa"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="24dp"
+            android:hint="Datum servisa">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDatum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                android:focusable="false"/>
+                android:focusable="false"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Sačuvaj servisni zapis"
-            android:textSize="16sp"
-            android:backgroundTint="@color/primary"/>
+            android:backgroundTint="@color/primary"
+            android:text="Sačuvaj zapis"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>
