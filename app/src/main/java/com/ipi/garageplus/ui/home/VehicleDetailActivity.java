@@ -126,6 +126,7 @@ public class VehicleDetailActivity extends AppCompatActivity
         fabAddService.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddServiceActivity.class);
             intent.putExtra(AddServiceActivity.EXTRA_VEHICLE_ID, vehicleId);
+            intent.putExtra(AddServiceActivity.EXTRA_VEHICLE_NAME, vehicleName);
             startActivity(intent);
         });
 

@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,22 +18,30 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ipi.garageplus.R;
 import com.ipi.garageplus.model.ServiceRecord;
+import com.ipi.garageplus.util.AlarmScheduler;
 import com.ipi.garageplus.viewmodel.ServiceRecordViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class AddServiceActivity extends AppCompatActivity {
 
     public static final String EXTRA_VEHICLE_ID = "vehicle_id";
+    public static final String EXTRA_VEHICLE_NAME = "vehicle_name";
 
     private TextInputEditText etOpis, etCijena, etKilometraza, etDatum;
     private AutoCompleteTextView etKategorija, etPodkategorija;
     private TextInputLayout tilPodkategorija;
     private Button btnSave;
+    private TextView tvReminderInfo;
     private ServiceRecordViewModel viewModel;
     private int vehicleId;
+    private String vehicleName;
 
     private View cardFilteri;
     private CheckBox cbFilterUlja, cbFilterKlime, cbFilterGoriva, cbFilterKabine, cbFilterZraka;
@@ -54,6 +63,8 @@ public class AddServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_service);
 
         vehicleId = getIntent().getIntExtra(EXTRA_VEHICLE_ID, -1);
+        vehicleName = getIntent().getStringExtra(EXTRA_VEHICLE_NAME);
+
         if (vehicleId == -1) {
             finish();
             return;
@@ -69,6 +80,7 @@ public class AddServiceActivity extends AppCompatActivity {
         etKilometraza = findViewById(R.id.etKilometraza);
         etDatum = findViewById(R.id.etDatum);
         btnSave = findViewById(R.id.btnSave);
+        tvReminderInfo = findViewById(R.id.tvReminderInfo);
 
         cardFilteri = findViewById(R.id.cardFilteri);
         cbFilterUlja = findViewById(R.id.cbFilterUlja);
@@ -97,6 +109,7 @@ public class AddServiceActivity extends AppCompatActivity {
             tilPodkategorija.setVisibility(View.VISIBLE);
             cardFilteri.setVisibility(View.GONE);
             resetFilteri();
+            updateReminderText();
         });
 
         etPodkategorija.setOnItemClickListener((parent, view, position, id) -> {
@@ -108,6 +121,7 @@ public class AddServiceActivity extends AppCompatActivity {
                 cardFilteri.setVisibility(View.GONE);
                 resetFilteri();
             }
+            updateReminderText();
         });
 
         etDatum.setOnClickListener(v -> showDatePicker());
@@ -127,9 +141,64 @@ public class AddServiceActivity extends AppCompatActivity {
     private void showDatePicker() {
         Calendar cal = Calendar.getInstance();
         new DatePickerDialog(this, (view, year, month, day) -> {
-            String datum = String.format("%02d.%02d.%d", day, month + 1, year);
+            String datum = String.format(Locale.getDefault(), "%02d.%02d.%d", day, month + 1, year);
             etDatum.setText(datum);
+            updateReminderText();
         }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    private String calculateReminderDate(String registrationDate) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            Date date = sdf.parse(registrationDate);
+            if (date == null) return null;
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.YEAR, 1);
+            cal.add(Calendar.DAY_OF_YEAR, -7);
+            return sdf.format(cal.getTime());
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    private long getReminderTimeMillis(String registrationDate) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            Date date = sdf.parse(registrationDate);
+            if (date == null) return -1;
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.YEAR, 1);
+            cal.add(Calendar.DAY_OF_YEAR, -7);
+            cal.set(Calendar.HOUR_OF_DAY, 9);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            return cal.getTimeInMillis();
+        } catch (ParseException e) {
+            return -1;
+        }
+    }
+
+    private void updateReminderText() {
+        String kategorija = etKategorija.getText() != null ? etKategorija.getText().toString().trim() : "";
+        String podkategorija = etPodkategorija.getText() != null ? etPodkategorija.getText().toString().trim() : "";
+        String datum = etDatum.getText() != null ? etDatum.getText().toString().trim() : "";
+
+        if ("Troškovi vozila".equals(kategorija) && "Registracija".equals(podkategorija) && !TextUtils.isEmpty(datum)) {
+            String reminderDate = calculateReminderDate(datum);
+            if (reminderDate != null) {
+                tvReminderInfo.setVisibility(View.VISIBLE);
+                tvReminderInfo.setText("Podsjetnik za obnovu registracije bit će zakazan za " + reminderDate + ".");
+                return;
+            }
+        }
+
+        tvReminderInfo.setVisibility(View.GONE);
+        tvReminderInfo.setText("");
     }
 
     private void saveServiceRecord() {
@@ -187,6 +256,19 @@ public class AddServiceActivity extends AppCompatActivity {
         );
 
         viewModel.insertServiceRecord(record);
+
+        if ("Troškovi vozila".equals(kategorija) && "Registracija".equals(podkategorija)) {
+            long reminderTime = getReminderTimeMillis(datum);
+            if (reminderTime > 0) {
+                AlarmScheduler.scheduleRegistrationReminder(
+                        this,
+                        reminderTime,
+                        vehicleName != null ? vehicleName : "vozila",
+                        calculateReminderDate(datum)
+                );
+            }
+        }
+
         Toast.makeText(this, "Servisni zapis dodan!", Toast.LENGTH_SHORT).show();
         finish();
     }

@@ -161,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:hint="Datum servisa">
+            android:hint="Datum">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDatum"
@@ -178,6 +178,16 @@
             android:backgroundTint="@color/primary"
             android:text="Sačuvaj zapis"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvReminderInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:text=" " />
 
     </LinearLayout>
 </ScrollView>

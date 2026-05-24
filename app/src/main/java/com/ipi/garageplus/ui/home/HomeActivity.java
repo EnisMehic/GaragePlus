@@ -1,14 +1,21 @@
 package com.ipi.garageplus.ui.home;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,12 +32,15 @@ import com.ipi.garageplus.viewmodel.HomeViewModel;
 
 public class HomeActivity extends AppCompatActivity implements VehicleAdapter.OnVehicleClickListener {
 
+    private static final int REQUEST_NOTIFICATION_PERMISSION = 1001;
+
     private HomeViewModel viewModel;
     private VehicleAdapter adapter;
     private TextView tvEmptyState, tvWelcome;
     private RecyclerView recyclerView;
     private FloatingActionButton fabAddVehicle;
     private FirebaseAuth mAuth;
+    private ActivityResultLauncher<String> notificationPermissionLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,21 @@ public class HomeActivity extends AppCompatActivity implements VehicleAdapter.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        notificationPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (!isGranted) {
+                        Toast.makeText(
+                                this,
+                                "Dozvola za notifikacije nije odobrena. Podsjetnici neće biti prikazani.",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        );
+
+        requestNotificationPermissionIfNeeded();
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -76,6 +101,15 @@ public class HomeActivity extends AppCompatActivity implements VehicleAdapter.On
         fabAddVehicle.setOnClickListener(v -> {
             startActivity(new Intent(this, AddVehicleActivity.class));
         });
+    }
+
+    private void requestNotificationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
     @Override
