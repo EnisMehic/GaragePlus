@@ -110,11 +110,18 @@ public class ServiceScheduleActivity extends AppCompatActivity {
 
         List<ServiceGroup> result = new ArrayList<>();
         for (Map.Entry<String, Map<String, Double>> categoryEntry : grouped.entrySet()) {
+            String category = categoryEntry.getKey();
+            Map<String, Double> subMap = categoryEntry.getValue();
+
             List<SubcategoryTotal> totals = new ArrayList<>();
-            for (Map.Entry<String, Double> subEntry : categoryEntry.getValue().entrySet()) {
+            double categoryTotal = 0.0;
+
+            for (Map.Entry<String, Double> subEntry : subMap.entrySet()) {
                 totals.add(new SubcategoryTotal(subEntry.getKey(), subEntry.getValue()));
+                categoryTotal += subEntry.getValue();
             }
-            result.add(new ServiceGroup(categoryEntry.getKey(), totals));
+
+            result.add(new ServiceGroup(category, categoryTotal, totals));
         }
 
         return result;

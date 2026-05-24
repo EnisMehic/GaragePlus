@@ -23,8 +23,7 @@ import com.ipi.garageplus.viewmodel.ServiceRecordViewModel;
 
 import java.util.List;
 
-public class VehicleDetailActivity extends AppCompatActivity
-        implements ServiceRecordAdapter.OnServiceClickListener {
+public class VehicleDetailActivity extends AppCompatActivity implements ServiceRecordAdapter.OnServiceClickListener {
 
     public static final String EXTRA_VEHICLE_ID = "vehicle_id";
     public static final String EXTRA_VEHICLE_NAME = "vehicle_name";
@@ -92,7 +91,6 @@ public class VehicleDetailActivity extends AppCompatActivity
         ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sortOptions);
         sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSort.setAdapter(sortAdapter);
-
         spinnerSort.setSelection(0);
 
         spinnerSort.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {

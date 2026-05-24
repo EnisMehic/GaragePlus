@@ -65,15 +65,17 @@ public class ServiceScheduleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     static class GroupViewHolder extends RecyclerView.ViewHolder {
-        TextView tvCategory;
+        TextView tvCategory, tvCategoryTotal;
 
         GroupViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCategory = itemView.findViewById(R.id.tvCategory);
+            tvCategoryTotal = itemView.findViewById(R.id.tvCategoryTotal);
         }
 
         void bind(ServiceGroup group) {
             tvCategory.setText(group.getCategory());
+            tvCategoryTotal.setText(String.format("%.2f KM", group.getTotal()));
         }
     }
 
