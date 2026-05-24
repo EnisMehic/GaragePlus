@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ipi.garageplus.R;
 import com.ipi.garageplus.model.ServiceRecord;
@@ -35,6 +36,7 @@ public class VehicleDetailActivity extends AppCompatActivity
     private SearchView searchView;
     private Spinner spinnerSort;
     private FloatingActionButton fabAddService;
+    private MaterialCardView topCard;
     private int vehicleId;
     private String vehicleName;
 
@@ -57,6 +59,7 @@ public class VehicleDetailActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        topCard = findViewById(R.id.topCard);
         tvVehicleName = findViewById(R.id.tvVehicleName);
         tvTotalCost = findViewById(R.id.tvTotalCost);
         tvEmptyState = findViewById(R.id.tvEmptyState);
@@ -71,6 +74,13 @@ public class VehicleDetailActivity extends AppCompatActivity
             getSupportActionBar().setTitle(vehicleName);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        topCard.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ServiceScheduleActivity.class);
+            intent.putExtra(ServiceScheduleActivity.EXTRA_VEHICLE_ID, vehicleId);
+            intent.putExtra(ServiceScheduleActivity.EXTRA_VEHICLE_NAME, vehicleName);
+            startActivity(intent);
+        });
 
         adapter = new ServiceRecordAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
